@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_samarthsudarshan_gosample_1734935723409-pr-trigger-input-set
+  identifier: Build_samarthsudarshan_gosample_1734935723409prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_samarthsudarshan_gosample_1734935723409
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
