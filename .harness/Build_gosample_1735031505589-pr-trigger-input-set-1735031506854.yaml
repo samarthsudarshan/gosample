@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_gosample_1735031505589-pr-trigger-input-set
+  identifier: Build_gosample_1735031505589prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: samarthtest
+  pipeline:
+    identifier: Build_gosample_1735031505589
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
