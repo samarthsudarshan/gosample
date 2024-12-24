@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_gosample_1735031505589-push-trigger-input-set
+  identifier: Build_gosample_1735031505589pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: samarthtest
+  pipeline:
+    identifier: Build_gosample_1735031505589
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
