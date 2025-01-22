@@ -52,3 +52,33 @@ pipeline:
             spec: {}
             type: Cloud
         type: CI
+    - stage:
+        name: test-rspm
+        identifier: testrspm
+        description: ""
+        type: SecurityTests
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+          execution:
+            steps:
+              - step:
+                  type: SscaCompliance
+                  name: SCS Compliance_1
+                  identifier: SCSCompliance_1
+                  spec:
+                    source:
+                      type: github
+                      spec:
+                        connectorRef: Samgithub
+                        repoName: test-compcheck
+                        scan_org: true
