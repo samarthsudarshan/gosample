@@ -45,12 +45,22 @@ pipeline:
                       type: JUnit
                   timeout: ""
                   type: Run
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: samdockerhub
+                    repo: gosample
+                    tags:
+                      - latest
+                    caching: true
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
-            spec: {}
             type: Cloud
+            spec: {}
         type: CI
     - stage:
         name: test-rspm
