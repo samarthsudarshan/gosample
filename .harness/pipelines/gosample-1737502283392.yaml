@@ -71,6 +71,21 @@ pipeline:
                       spec:
                         private_key: sam-private-key
                         password: sam-cosign-password
+              - step:
+                  type: SlsaVerification
+                  name: SlsaVerification_1
+                  identifier: SlsaVerification_1
+                  spec:
+                    source:
+                      type: Docker
+                      spec:
+                        connector: samdockerhub
+                        image_path: samarthsud/gosample
+                        tag: latest
+                    verify_attestation:
+                      type: cosign
+                      spec:
+                        public_key: sam-cosign-public
           platform:
             os: Linux
             arch: Amd64
