@@ -121,7 +121,7 @@ pipeline:
             type: KubernetesDirect
             spec:
               connectorRef: account.kubernetes_connector_for_at
-              namespace: default
+              namespace: ssca-at
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
