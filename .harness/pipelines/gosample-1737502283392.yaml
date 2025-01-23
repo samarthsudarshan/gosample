@@ -20,48 +20,6 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
-                  identifier: BuildAndPushDockerRegistry_1
-                  spec:
-                    connectorRef: samdockerhub
-                    repo: samarthsud/gosample
-                    tags:
-                      - latest
-                    caching: true
-                contextType: Pipeline
-              - step:
-                  type: provenance
-                  name: SLSA Generation_1
-                  identifier: SLSAGeneration_1
-                  spec:
-                    source:
-                      type: docker
-                      spec:
-                        connector: samdockerhub
-                        repo: samarthsud/gosample:latest
-                        digest: <+pipeline.stages.build.spec.execution.steps.BuildAndPushDockerRegistry_1.artifact_BuildAndPushDockerRegistry_1.stepArtifacts.publishedImageArtifacts[0].digest>
-                    attestation:
-                      type: cosign
-                      spec:
-                        private_key: sam-private-key
-                        password: sam-cosign-password
-              - step:
-                  type: SlsaVerification
-                  name: SlsaVerification_1
-                  identifier: SlsaVerification_1
-                  spec:
-                    source:
-                      type: Docker
-                      spec:
-                        connector: samdockerhub
-                        image_path: samarthsud/gosample
-                        tag: latest
-                    verify_attestation:
-                      type: cosign
-                      spec:
-                        public_key: sam-cosign-public
-              - step:
                   type: SscaArtifactSigning
                   name: Artifact Signing_1
                   identifier: ArtifactSigning_1
