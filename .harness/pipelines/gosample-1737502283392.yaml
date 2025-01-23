@@ -56,22 +56,19 @@ pipeline:
                       - latest
                     caching: true
               - step:
-                  type: SscaArtifactSigning
-                  name: Artifact Signing_1
-                  identifier: ArtifactSigning_1
+                  type: SscaArtifactVerification
+                  name: Artifact Verification_1
+                  identifier: ArtifactVerification_1
                   spec:
                     source:
                       type: docker
                       spec:
                         connector: samdockerhub
                         image: samarthsud/gosample:latest
-                    signing:
+                    verifySign:
                       type: cosign
                       spec:
-                        private_key: account.Cosign_Private_Key
-                        password: account.Cosign_Password
-                    uploadSignature:
-                      upload: true
+                        public_key: sam-cosign-public
           platform:
             os: Linux
             arch: Amd64
