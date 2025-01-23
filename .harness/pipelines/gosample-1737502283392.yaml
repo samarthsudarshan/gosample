@@ -120,7 +120,7 @@ pipeline:
           infrastructure:
             type: KubernetesDirect
             spec:
-              connectorRef: samk8s
+              connectorRef: account.kubernetes_connector_for_at
               namespace: default
               automountServiceAccountToken: true
               nodeSelector: {}
