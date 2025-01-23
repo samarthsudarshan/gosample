@@ -55,43 +55,23 @@ pipeline:
                     tags:
                       - latest
                     caching: true
-              - parallel:
-                  - step:
-                      type: SscaOrchestration
-                      name: SBOM Orchestration_1
-                      identifier: SBOMOrchestration_1
+              - step:
+                  type: SscaArtifactSigning
+                  name: Artifact Signing_1
+                  identifier: ArtifactSigning_1
+                  spec:
+                    source:
+                      type: docker
                       spec:
-                        mode: generation
-                        tool:
-                          type: Syft
-                          spec:
-                            format: spdx-json
-                        source:
-                          type: docker
-                          spec:
-                            connector: samdockerhub
-                            image: samarthsud/gosample:latest
-                        resources:
-                          limits:
-                            memory: 500Mi
-                            cpu: "0.5"
-                  - step:
-                      type: SscaArtifactSigning
-                      name: Artifact Signing_1
-                      identifier: ArtifactSigning_1
+                        connector: samdockerhub
+                        image: samarthsud/gosample:latest
+                    signing:
+                      type: cosign
                       spec:
-                        source:
-                          type: docker
-                          spec:
-                            connector: samdockerhub
-                            image: samarthsud/gosample:latest
-                        signing:
-                          type: cosign
-                          spec:
-                            private_key: sam-private-key
-                            password: sam-cosign-password
-                        uploadSignature:
-                          upload: true
+                        private_key: sam-private-key
+                        password: sam-cosign-password
+                    uploadSignature:
+                      upload: true
           platform:
             os: Linux
             arch: Amd64
