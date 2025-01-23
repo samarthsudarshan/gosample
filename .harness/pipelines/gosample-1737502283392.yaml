@@ -75,6 +75,8 @@ pipeline:
                       spec:
                         privateKey: sam-private-key
                         password: sam-cosign-password
+                    sbom_drift:
+                      base: last_generated_sbom
                     resources:
                       limits:
                         memory: 500Mi
