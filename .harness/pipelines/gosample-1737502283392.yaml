@@ -68,8 +68,8 @@ pipeline:
                     signing:
                       type: cosign
                       spec:
-                        private_key: sam-private-key
-                        password: sam-cosign-password
+                        private_key: account.Cosign_Private_Key
+                        password: account.Cosign_Password
                     uploadSignature:
                       upload: true
           platform:
