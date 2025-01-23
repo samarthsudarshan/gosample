@@ -56,19 +56,16 @@ pipeline:
                       - latest
                     caching: true
               - step:
-                  type: SscaArtifactVerification
-                  name: Artifact Verification_1
-                  identifier: ArtifactVerification_1
+                  type: provenance
+                  name: SLSA Generation_1
+                  identifier: SLSAGeneration_1
                   spec:
                     source:
                       type: docker
                       spec:
                         connector: samdockerhub
-                        image: samarthsud/gosample:latest
-                    verifySign:
-                      type: cosign
-                      spec:
-                        public_key: sam-cosign-public
+                        repo: samarthsud/gosample:latest
+                        digest: <+pipeline.stages.build.spec.execution.steps.BuildAndPushDockerRegistry_1.artifact_BuildAndPushDockerRegistry_1.stepArtifacts.publishedImageArtifacts[0].digest>
           platform:
             os: Linux
             arch: Amd64
