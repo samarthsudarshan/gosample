@@ -29,6 +29,7 @@ pipeline:
                     tags:
                       - latest
                     caching: true
+                contextType: Pipeline
               - step:
                   type: provenance
                   name: SLSA Generation_1
