@@ -55,6 +55,30 @@ pipeline:
                     tags:
                       - latest
                     caching: true
+              - step:
+                  type: SscaOrchestration
+                  name: SBOM Orchestration_1
+                  identifier: SBOMOrchestration_1
+                  spec:
+                    mode: generation
+                    tool:
+                      type: Syft
+                      spec:
+                        format: spdx-json
+                    source:
+                      type: docker
+                      spec:
+                        connector: samdockerhub
+                        image: samarthsud/gosample:latest
+                    attestation:
+                      type: cosign
+                      spec:
+                        privateKey: sam-private-key
+                        password: sam-cosign-password
+                    resources:
+                      limits:
+                        memory: 500Mi
+                        cpu: "0.5"
           platform:
             os: Linux
             arch: Amd64
